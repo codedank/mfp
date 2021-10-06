@@ -11,19 +11,22 @@ const devConfig = {
       index: 'index.html'
     }
   },
-  plugins: [
-    new ModuleFederationPlugin({
-      name: 'marketing',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './Marketing': './src/bootstrap'
-      },
-      shared: packageJson.dependencies
-    }),
-    new HtmlWebpackPlugin({
-      template: './public/index.html'
-    })
-  ]
+  module: {
+    plugins: [
+      new ModuleFederationPlugin({
+        name: 'marketing',
+        filename: 'remoteEntry.js',
+        exposes: {
+          './Marketing': './src/bootstrap'
+        },
+        shared: packageJson.dependencies
+      }),
+      new HtmlWebpackPlugin({
+        template: './public/index.html'
+      })
+    ]
+  }
+
 };
 
 module.exports = merge(commonConfig, devConfig)
